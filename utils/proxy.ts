@@ -6,7 +6,9 @@ interface RequestInit {
 
 export const getProxyAgent = () => {
   if (!process.env.http_proxy) {
-    console.warn("cannot found http_proxy!!!")
+    if (process.env.NODE_ENV === "development") {
+      console.warn("cannot found http_proxy!!!")
+    }
     return undefined
   }
   return new HttpsProxyAgent(process.env.http_proxy)
