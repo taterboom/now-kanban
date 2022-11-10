@@ -1,5 +1,6 @@
 import { gql } from "graphql-request"
 import useSWR from "swr"
+import GridItem from "../../components/GridITem"
 
 export default function JikeDaily() {
   const { data, error } = useSWR(
@@ -16,21 +17,19 @@ export default function JikeDaily() {
     `
   )
 
-  if (error) return <div>Failed to load</div>
-  if (!data) return <div>Loading...</div>
-
   return (
-    <section>
-      <p>{data.jikeDaily.title}</p>
-      <ul>
-        {data.jikeDaily.items.map((item: any, index: number) => (
-          <li key={index}>
-            <a href={item.link} target="_blank" rel="noreferrer">
-              {item.text}
-            </a>
-          </li>
-        ))}
-      </ul>
-    </section>
+    <GridItem title={data?.jikeDaily.title.slice(0, -5)} error={error} loading={!data}>
+      {!!data && (
+        <ul>
+          {data.jikeDaily.items.map((item: any, index: number) => (
+            <li key={index}>
+              <a href={item.link} target="_blank" rel="noreferrer">
+                {item.text}
+              </a>
+            </li>
+          ))}
+        </ul>
+      )}
+    </GridItem>
   )
 }

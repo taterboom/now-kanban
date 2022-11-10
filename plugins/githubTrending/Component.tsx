@@ -1,6 +1,7 @@
 import { gql } from "graphql-request"
 import { useState } from "react"
 import useSWR from "swr"
+import GridItem, { GridItemError, GridItemLoading } from "../../components/GridITem"
 
 const SINCES = ["daily", "weekly", "monthly"]
 const LANGUAGES = ["any", "javascript", "typescript"]
@@ -36,38 +37,46 @@ export default function GithubTrending() {
   if (!data) return <div>Loading...</div>
 
   return (
-    <div>
-      <select value={since} onChange={(e) => setSince(e.target.value)}>
-        {SINCES.map((item) => (
-          <option key={item} value={item}>
-            {item}
-          </option>
-        ))}
-      </select>
-      <select value={language} onChange={(e) => setLanguage(e.target.value)}>
-        {LANGUAGES.map((item) => (
-          <option key={item} value={item}>
-            {item}
-          </option>
-        ))}
-      </select>
-      <select value={spokenLanguage} onChange={(e) => setSpokenLanguage(e.target.value)}>
-        {SPOKEN_LANGUAGES.map((item) => (
-          <option key={item} value={item}>
-            {item}
-          </option>
-        ))}
-      </select>
-      <ul>
-        {data.githubTrendingItems.map((item: any, index: number) => (
-          <li key={index}>
-            {/* <a href={`https://v2ex.com${item.link}`} target="_blank" rel="noreferrer">
+    <GridItem title="Github Trending" error={error} loading={!data} ignoreDefaultRendering>
+      <div className="sticky top-6">
+        <select value={since} onChange={(e) => setSince(e.target.value)}>
+          {SINCES.map((item) => (
+            <option key={item} value={item}>
+              {item}
+            </option>
+          ))}
+        </select>
+        <select value={language} onChange={(e) => setLanguage(e.target.value)}>
+          {LANGUAGES.map((item) => (
+            <option key={item} value={item}>
+              {item}
+            </option>
+          ))}
+        </select>
+        <select value={spokenLanguage} onChange={(e) => setSpokenLanguage(e.target.value)}>
+          {SPOKEN_LANGUAGES.map((item) => (
+            <option key={item} value={item}>
+              {item}
+            </option>
+          ))}
+        </select>
+      </div>
+      {error ? (
+        <GridItemError />
+      ) : !data ? (
+        <GridItemLoading />
+      ) : (
+        <ul>
+          {data?.githubTrendingItems.map((item: any, index: number) => (
+            <li key={index}>
+              {/* <a href={`https://v2ex.com${item.link}`} target="_blank" rel="noreferrer">
             {item.text}
           </a> */}
-            {item.title}
-          </li>
-        ))}
-      </ul>
-    </div>
+              {item.title}
+            </li>
+          ))}
+        </ul>
+      )}
+    </GridItem>
   )
 }

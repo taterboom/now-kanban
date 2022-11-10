@@ -1,4 +1,5 @@
 import GithubTrending from "../plugins/githubTrending/Component"
+import Grid from "../components/Grid"
 import JikeDaily from "../plugins/jikeDaily/Component"
 import OschinaHot from "../plugins/oschinaHot/Component"
 import V2exHot from "../plugins/v2exHot/Component"
@@ -7,13 +8,13 @@ import XueqiuLive from "../plugins/xueqiuLive/Component"
 
 export default function Index() {
   return (
-    <div>
+    <Grid>
       <WeiboHot />
       <XueqiuLive />
       <V2exHot />
       <JikeDaily />
       <GithubTrending />
       <OschinaHot />
-    </div>
+    </Grid>
   )
 }

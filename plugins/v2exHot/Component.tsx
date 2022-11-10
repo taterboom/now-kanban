@@ -1,5 +1,6 @@
 import { gql } from "graphql-request"
 import useSWR from "swr"
+import GridItem from "../../components/GridITem"
 
 export default function V2exHot() {
   const { data, error } = useSWR(
@@ -13,18 +14,19 @@ export default function V2exHot() {
     `
   )
 
-  if (error) return <div>Failed to load</div>
-  if (!data) return <div>Loading...</div>
-
   return (
-    <ul>
-      {data.v2exHotItems.map((item: any, index: number) => (
-        <li key={index}>
-          <a href={`https://v2ex.com${item.link}`} target="_blank" rel="noreferrer">
-            {item.text}
-          </a>
-        </li>
-      ))}
-    </ul>
+    <GridItem title="V2EX热议" error={error} loading={!data}>
+      {!!data && (
+        <ul>
+          {data.v2exHotItems.map((item: any, index: number) => (
+            <li key={index}>
+              <a href={`https://v2ex.com${item.link}`} target="_blank" rel="noreferrer">
+                {item.text}
+              </a>
+            </li>
+          ))}
+        </ul>
+      )}
+    </GridItem>
   )
 }
