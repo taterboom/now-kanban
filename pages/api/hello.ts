@@ -1,4 +1,3 @@
-import { pick } from "lodash"
 import type { NextApiRequest, NextApiResponse } from "next"
 import { executeInPage } from "../../utils/headless"
 
@@ -49,17 +48,33 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
   // }
   // console.log("!", $("item title").text())
 
-  const result = await executeInPage("https://xueqiu.com", (page) =>
-    page.evaluate(async () => {
-      const _result = await fetch(
-        `/statuses/livenews/list.json?since_id=-1&max_id=-1&count=20`
-      ).then((res) => res.json())
-      return _result
+  const result = await executeInPage("https://www.indiehackers.com/explore", async (page) => {
+    await page.waitForSelector(".explore")
+    console.log("ok")
+    const data = await page.evaluate(() => {
+      const sections = document.querySelectorAll(".explore__category")
+      const sectionsData = []
+      for (const section of sections) {
+        const title = section.querySelector(".explore__category-title")?.textContent
+        const sectionData = {
+          title,
+          items: [] as any[],
+        }
+        sectionsData.push(sectionData)
+        const items = section.querySelectorAll(".explore__category-item")
+        for (const item of items) {
+          const itemTitle = item.querySelector(".category-item__title")?.textContent
+          const itemLink = item.getAttribute("href")
+          sectionData.items.push({
+            title: itemTitle,
+            link: itemLink,
+          })
+        }
+      }
+      return sectionsData
     })
-  )
+    return data
+  })
 
-  const data =
-    result?.items.map((item: any) => pick(item, ["id", "created_at", "target", "text"])) || []
-
-  res.status(200).json({ data })
+  res.status(200).json({ data: result })
 }

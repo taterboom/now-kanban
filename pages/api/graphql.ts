@@ -3,8 +3,10 @@ import { createYoga } from "graphql-yoga"
 import { Plugin } from "../../plugins/Plugin"
 
 import githubTrending from "../../plugins/githubTrending/plugin"
+import indiehackerExplore from "../../plugins/indiehackerExplore/plugin"
 import jikeDaily from "../../plugins/jikeDaily/plugin"
 import oschinaHot from "../../plugins/oschinaHot/plugin"
+import producthuntRank from "../../plugins/producthuntRank/plugin"
 import v2exHot from "../../plugins/v2exHot/plugin"
 import weibohot from "../../plugins/weiboHot/plugin"
 import xueqiuLive from "../../plugins/xueqiuLive/plugin"
@@ -30,6 +32,8 @@ const schema = new GraphQLSchema({
     v2exHot,
     githubTrending,
     oschinaHot,
+    producthuntRank,
+    indiehackerExplore,
   ]),
 })
 

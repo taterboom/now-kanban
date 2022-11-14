@@ -5,6 +5,8 @@ import OschinaHot from "../plugins/oschinaHot/Component"
 import V2exHot from "../plugins/v2exHot/Component"
 import WeiboHot from "../plugins/weiboHot/Component"
 import XueqiuLive from "../plugins/xueqiuLive/Component"
+import ProducthuntRank from "../plugins/producthuntRank/Component"
+import IndiehackerExplore from "../plugins/indiehackerExplore/Component"
 
 export default function Index() {
   return (
@@ -15,6 +17,8 @@ export default function Index() {
       <JikeDaily />
       <GithubTrending />
       <OschinaHot />
+      <ProducthuntRank />
+      <IndiehackerExplore />
     </Grid>
   )
 }
