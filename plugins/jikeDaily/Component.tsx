@@ -1,8 +1,9 @@
 import { gql } from "graphql-request"
 import useSWR from "swr"
 import GridItem from "../../components/GridITem"
+import { PluginComponent } from "../PluginComponent"
 
-export default function JikeDaily() {
+const JikeDaily: PluginComponent = () => {
   const { data, error } = useSWR(
     gql`
       {
@@ -20,7 +21,7 @@ export default function JikeDaily() {
   return (
     <GridItem title={data?.jikeDaily.title.slice(0, -5)} error={error} loading={!data}>
       {!!data && (
-        <ul>
+        <ol>
           {data.jikeDaily.items.map((item: any, index: number) => (
             <li key={index}>
               <a href={item.link} target="_blank" rel="noreferrer">
@@ -28,8 +29,13 @@ export default function JikeDaily() {
               </a>
             </li>
           ))}
-        </ul>
+        </ol>
       )}
     </GridItem>
   )
 }
+
+JikeDaily.category = "综合新闻"
+JikeDaily.title = "即刻一觉醒来"
+
+export default JikeDaily

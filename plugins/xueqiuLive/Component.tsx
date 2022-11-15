@@ -1,8 +1,9 @@
 import { gql } from "graphql-request"
 import useSWR from "swr"
 import GridItem from "../../components/GridITem"
+import { PluginComponent } from "../PluginComponent"
 
-export default function XueqiuLive() {
+const XueqiuLive: PluginComponent = () => {
   const { data, error } = useSWR(
     gql`
       {
@@ -17,7 +18,7 @@ export default function XueqiuLive() {
 
   return (
     <GridItem title="雪球7*24" error={error} loading={!data} className="row-span-2">
-      <ul>
+      <ul className="list-none">
         {data?.xueqiuLiveItems.map((item: any, index: number) => (
           <li key={index}>
             <a href={item.target} target="_blank" rel="noreferrer">
@@ -30,3 +31,8 @@ export default function XueqiuLive() {
     </GridItem>
   )
 }
+
+XueqiuLive.category = "财经"
+XueqiuLive.title = "雪球 Live"
+
+export default XueqiuLive

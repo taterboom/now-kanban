@@ -69,7 +69,7 @@ export default new Resolver({
         const categoryLink = categoryEl.attr("href")
 
         const votes = $(this).find("[data-test=vote-button]").first().text()
-        console.log(votes)
+
         return {
           title: title.trim(),
           link,

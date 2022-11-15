@@ -17,24 +17,15 @@ type GridItemProps = React.PropsWithChildren<{
 }>
 
 function GridItem(props: GridItemProps) {
-  const className = useMemo(
-    () => `py-1 px-2 ring overflow-y-auto ${props.className || ""}`,
-    [props.className]
-  )
+  const className = useMemo(() => `p-1 ${props.className || ""}`, [props.className])
 
   return (
     <section className={className}>
       {(() => {
-        const content = (
-          <>
-            <h2 className="sticky top-0">{props.title}</h2>
-            <div>{props.children}</div>
-          </>
-        )
-        if (props.ignoreDefaultRendering) return content
+        if (props.ignoreDefaultRendering) return props.children
         if (props.error) return <GridItemError />
         if (props.loading) return <GridItemLoading />
-        return content
+        return props.children
       })()}
     </section>
   )

@@ -1,8 +1,9 @@
 import { gql } from "graphql-request"
 import useSWR from "swr"
 import GridItem from "../../components/GridITem"
+import { PluginComponent } from "../PluginComponent"
 
-function Component() {
+const Hacknews: PluginComponent = () => {
   const { data, error } = useSWR(
     gql`
       {
@@ -17,7 +18,7 @@ function Component() {
   return (
     <GridItem title="HACKNEWS" error={error} loading={!data}>
       {!!data && (
-        <ul>
+        <ol>
           {data.hacknewsItems.map((item: any, index: number) => (
             <li key={index}>
               <a href={item.link} target="_blank" rel="noreferrer">
@@ -25,10 +26,13 @@ function Component() {
               </a>
             </li>
           ))}
-        </ul>
+        </ol>
       )}
     </GridItem>
   )
 }
 
-export default Component
+Hacknews.category = "社区热议"
+Hacknews.title = "HACKNEWS"
+
+export default Hacknews

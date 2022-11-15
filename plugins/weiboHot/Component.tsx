@@ -1,8 +1,9 @@
 import { gql } from "graphql-request"
 import useSWR from "swr"
 import GridItem from "../../components/GridITem"
+import { PluginComponent } from "../PluginComponent"
 
-export default function WeiboHot() {
+const WeiboHot: PluginComponent = () => {
   const { data, error } = useSWR(
     gql`
       {
@@ -18,12 +19,12 @@ export default function WeiboHot() {
   return (
     <GridItem title="微博热搜" error={error} loading={!data}>
       {!!data && (
-        <ul>
+        <ul className="list-none">
           {data.weiboHotItems.map((item: any, index: number) => (
-            <li key={index}>
+            <li key={index} className="flex gap-1 items-center">
               <img width={24} src={item.pic} alt="" />
               <p>{item.desc}</p>
-              <span>{item.desc_extr}</span>
+              <span className="text-xs opacity-60">{item.desc_extr}</span>
             </li>
           ))}
         </ul>
@@ -31,3 +32,8 @@ export default function WeiboHot() {
     </GridItem>
   )
 }
+
+WeiboHot.category = "综合新闻"
+WeiboHot.title = "Weibo热搜"
+
+export default WeiboHot

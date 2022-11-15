@@ -1,8 +1,9 @@
 import { gql } from "graphql-request"
 import useSWR from "swr"
 import GridItem from "../../components/GridITem"
+import { PluginComponent } from "../PluginComponent"
 
-export default function IndiehackerExplore() {
+const IndiehackerExplore: PluginComponent = () => {
   const { data, error } = useSWR(
     gql`
       {
@@ -19,12 +20,12 @@ export default function IndiehackerExplore() {
 
   return (
     <GridItem title="Indiehacker Explore" error={error} loading={!data} className="row-span-2">
-      <ul>
+      <ul className="list-none py-1 divide-y divide-base-300/20">
         {data?.indiehackerExploreItems.map((section: any, index: number) => (
           <li key={index}>
             <div>
-              <p>{section.title}</p>
-              <ul>
+              <p className="font-semibold">{section.title}</p>
+              <ol>
                 {section.items.map((item: any, index: number) => (
                   <li key={index}>
                     <a href={item.link} target="_blank" rel="noreferrer">
@@ -32,7 +33,7 @@ export default function IndiehackerExplore() {
                     </a>
                   </li>
                 ))}
-              </ul>
+              </ol>
             </div>
           </li>
         ))}
@@ -40,3 +41,8 @@ export default function IndiehackerExplore() {
     </GridItem>
   )
 }
+
+IndiehackerExplore.category = "产品"
+IndiehackerExplore.title = "Indiehacker Explore"
+
+export default IndiehackerExplore

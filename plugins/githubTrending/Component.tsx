@@ -1,13 +1,14 @@
 import { gql } from "graphql-request"
-import { useState } from "react"
+import React, { useState, FunctionComponent } from "react"
 import useSWR from "swr"
 import GridItem, { GridItemError, GridItemLoading } from "../../components/GridITem"
+import { PluginComponent } from "../PluginComponent"
 
 const SINCES = ["daily", "weekly", "monthly"]
 const LANGUAGES = ["any", "javascript", "typescript"]
 const SPOKEN_LANGUAGES = ["any", "zh"]
 
-export default function GithubTrending() {
+const GithubTrending: PluginComponent = () => {
   const [since, setSince] = useState(SINCES[0])
   const [language, setLanguage] = useState(LANGUAGES[0])
   const [spokenLanguage, setSpokenLanguage] = useState(SPOKEN_LANGUAGES[0])
@@ -37,23 +38,41 @@ export default function GithubTrending() {
   if (!data) return <div>Loading...</div>
 
   return (
-    <GridItem title="Github Trending" error={error} loading={!data} ignoreDefaultRendering>
-      <div className="sticky top-6">
-        <select value={since} onChange={(e) => setSince(e.target.value)}>
+    <GridItem
+      className="h-full flex flex-col"
+      title="Github Trending"
+      error={error}
+      loading={!data}
+      ignoreDefaultRendering
+    >
+      <div className="flex gap-2">
+        <select
+          className="select select-bordered select-xs"
+          value={since}
+          onChange={(e) => setSince(e.target.value)}
+        >
           {SINCES.map((item) => (
             <option key={item} value={item}>
               {item}
             </option>
           ))}
         </select>
-        <select value={language} onChange={(e) => setLanguage(e.target.value)}>
+        <select
+          className="select select-bordered select-xs"
+          value={language}
+          onChange={(e) => setLanguage(e.target.value)}
+        >
           {LANGUAGES.map((item) => (
             <option key={item} value={item}>
               {item}
             </option>
           ))}
         </select>
-        <select value={spokenLanguage} onChange={(e) => setSpokenLanguage(e.target.value)}>
+        <select
+          className="select select-bordered select-xs"
+          value={spokenLanguage}
+          onChange={(e) => setSpokenLanguage(e.target.value)}
+        >
           {SPOKEN_LANGUAGES.map((item) => (
             <option key={item} value={item}>
               {item}
@@ -66,7 +85,7 @@ export default function GithubTrending() {
       ) : !data ? (
         <GridItemLoading />
       ) : (
-        <ul>
+        <ol className="mt-1 flex-1 overflow-y-auto">
           {data?.githubTrendingItems.map((item: any, index: number) => (
             <li key={index}>
               {/* <a href={`https://v2ex.com${item.link}`} target="_blank" rel="noreferrer">
@@ -75,8 +94,13 @@ export default function GithubTrending() {
               {item.title}
             </li>
           ))}
-        </ul>
+        </ol>
       )}
     </GridItem>
   )
 }
+
+GithubTrending.category = "产品"
+GithubTrending.title = "Github Trending"
+
+export default GithubTrending

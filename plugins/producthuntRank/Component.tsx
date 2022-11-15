@@ -2,10 +2,11 @@ import { gql } from "graphql-request"
 import { useMemo, useState } from "react"
 import useSWR from "swr"
 import GridItem, { GridItemError, GridItemLoading } from "../../components/GridITem"
+import { PluginComponent } from "../PluginComponent"
 
 const TIME_TYPES = ["today", "yesterday", "month"]
 
-export default function ProducthuntRank() {
+const ProducthuntRank: PluginComponent = () => {
   const [timeType, setTimeType] = useState(TIME_TYPES[0])
   const { data, error } = useSWR([
     gql`
@@ -30,9 +31,19 @@ export default function ProducthuntRank() {
   if (!data) return <div>Loading...</div>
 
   return (
-    <GridItem title="Producthunt Rank" error={error} loading={!data} ignoreDefaultRendering>
-      <div className="sticky top-6">
-        <select value={timeType} onChange={(e) => setTimeType(e.target.value)}>
+    <GridItem
+      className="h-full flex flex-col"
+      title="Producthunt Rank"
+      error={error}
+      loading={!data}
+      ignoreDefaultRendering
+    >
+      <div className="flex gap-2">
+        <select
+          className="select select-bordered select-xs"
+          value={timeType}
+          onChange={(e) => setTimeType(e.target.value)}
+        >
           {TIME_TYPES.map((item) => (
             <option key={item} value={item}>
               {item}
@@ -45,7 +56,7 @@ export default function ProducthuntRank() {
       ) : !data ? (
         <GridItemLoading />
       ) : (
-        <ul>
+        <ol className="mt-1 flex-1 overflow-y-auto">
           {data?.producthuntRankItems.map((item: any, index: number) => (
             <li key={index}>
               <div className="flex">
@@ -64,8 +75,13 @@ export default function ProducthuntRank() {
               </div>
             </li>
           ))}
-        </ul>
+        </ol>
       )}
     </GridItem>
   )
 }
+
+ProducthuntRank.category = "产品"
+ProducthuntRank.title = "Producthunt Rank"
+
+export default ProducthuntRank
