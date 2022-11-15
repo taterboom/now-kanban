@@ -1,7 +1,7 @@
 import { load } from "cheerio"
 import { GraphQLList, GraphQLObjectType, GraphQLString } from "graphql"
 import { getProxyAgent } from "../../utils/proxy"
-import { Plugin } from "../Plugin"
+import { Resolver } from "../Resolver"
 
 const ProducthuntRankItem = new GraphQLObjectType({
   name: "ProducthuntRankItem",
@@ -30,7 +30,7 @@ const getTime = (time: "month" | "yesterday" | "today") => {
   }
 }
 
-const plugin = new Plugin({
+export default new Resolver({
   producthuntRankItems: {
     type: new GraphQLList(ProducthuntRankItem),
     args: {
@@ -85,5 +85,3 @@ const plugin = new Plugin({
     },
   },
 })
-
-export default plugin

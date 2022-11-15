@@ -1,7 +1,7 @@
 import { load } from "cheerio"
 import { GraphQLInt, GraphQLList, GraphQLObjectType, GraphQLString } from "graphql"
 import { getProxyAgent } from "../../utils/proxy"
-import { Plugin } from "../Plugin"
+import { Resolver } from "../Resolver"
 
 // doc: https://docs.rsshub.app/programming.html#github-trending
 // /github/trending/:since/:language/:spoken_language
@@ -23,7 +23,7 @@ const GithubTrendingItem = new GraphQLObjectType({
 const DATA_REGEXP =
   /<img src="(.*)"\s.*<br>(.*)<br><br>Language:(.*)<br>Stars: (\d+)<br>Forks: (\d+)/
 
-const plugin = new Plugin({
+export default new Resolver({
   githubTrendingItems: {
     type: new GraphQLList(GithubTrendingItem),
     args: {
@@ -76,5 +76,3 @@ const plugin = new Plugin({
     },
   },
 })
-
-export default plugin

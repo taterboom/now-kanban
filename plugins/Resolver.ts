@@ -2,7 +2,7 @@ import { GraphQLFieldConfig } from "graphql"
 
 type Fields = Record<string, GraphQLFieldConfig<any, any>>
 
-export class Plugin {
+export class Resolver {
   fields: Fields
 
   constructor(fields: Fields) {

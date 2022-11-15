@@ -2,7 +2,7 @@ import { load } from "cheerio"
 import { GraphQLList, GraphQLObjectType, GraphQLString } from "graphql"
 import { getProxyAgent } from "../../utils/proxy"
 import { GraphQLReadableLink } from "../CommonType"
-import { Plugin } from "../Plugin"
+import { Resolver } from "../Resolver"
 
 const GraphQLJikeDaily = new GraphQLObjectType({
   name: "JikeDaily",
@@ -12,7 +12,7 @@ const GraphQLJikeDaily = new GraphQLObjectType({
   },
 })
 
-const plugin = new Plugin({
+export default new Resolver({
   jikeDaily: {
     type: GraphQLJikeDaily,
     resolve: async () => {
@@ -46,5 +46,3 @@ const plugin = new Plugin({
     },
   },
 })
-
-export default plugin

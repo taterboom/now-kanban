@@ -1,7 +1,7 @@
 import { GraphQLList, GraphQLObjectType, GraphQLString } from "graphql"
 import { executeInPage } from "../../utils/headless"
 import { GraphQLReadableLink } from "../CommonType"
-import { Plugin } from "../Plugin"
+import { Resolver } from "../Resolver"
 
 const IndiehackerExploreItem = new GraphQLObjectType({
   name: "IndiehackerExploreItem",
@@ -11,7 +11,7 @@ const IndiehackerExploreItem = new GraphQLObjectType({
   },
 })
 
-export default new Plugin({
+export default new Resolver({
   indiehackerExploreItems: {
     type: new GraphQLList(IndiehackerExploreItem),
     resolve: async () => {

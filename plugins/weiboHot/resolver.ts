@@ -1,6 +1,6 @@
 import { GraphQLInt, GraphQLList, GraphQLObjectType, GraphQLString } from "graphql"
 import { pick } from "lodash"
-import { Plugin } from "../Plugin"
+import { Resolver } from "../Resolver"
 
 var GraphQLWeiboHotItem = new GraphQLObjectType({
   name: "WeiboHotItem",
@@ -15,7 +15,7 @@ var GraphQLWeiboHotItem = new GraphQLObjectType({
   },
 })
 
-const plugin = new Plugin({
+export default new Resolver({
   weiboHotItems: {
     type: new GraphQLList(GraphQLWeiboHotItem),
     resolve: async () => {
@@ -33,5 +33,3 @@ const plugin = new Plugin({
     },
   },
 })
-
-export default plugin

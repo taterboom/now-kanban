@@ -2,9 +2,9 @@ import { load } from "cheerio"
 import { GraphQLList } from "graphql"
 import { getProxyAgent } from "../../utils/proxy"
 import { GraphQLReadableLink } from "../CommonType"
-import { Plugin } from "../Plugin"
+import { Resolver } from "../Resolver"
 
-const plugin = new Plugin({
+export default new Resolver({
   v2exHotItems: {
     type: new GraphQLList(GraphQLReadableLink),
     resolve: async () => {
@@ -37,5 +37,3 @@ const plugin = new Plugin({
     },
   },
 })
-
-export default plugin

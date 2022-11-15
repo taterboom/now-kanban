@@ -1,9 +1,9 @@
 import { load } from "cheerio"
 import { GraphQLList } from "graphql"
 import { GraphQLReadableLink } from "../CommonType"
-import { Plugin } from "../Plugin"
+import { Resolver } from "../Resolver"
 
-const plugin = new Plugin({
+export default new Resolver({
   oschinaHotItems: {
     type: new GraphQLList(GraphQLReadableLink),
     resolve: async () => {
@@ -20,5 +20,3 @@ const plugin = new Plugin({
     },
   },
 })
-
-export default plugin

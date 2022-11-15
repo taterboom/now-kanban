@@ -2,7 +2,7 @@ import { GraphQLInt, GraphQLList, GraphQLObjectType, GraphQLString } from "graph
 import { GraphQLBigInt } from "graphql-scalars"
 import { pick } from "lodash"
 import { executeInPage } from "../../utils/headless"
-import { Plugin } from "../Plugin"
+import { Resolver } from "../Resolver"
 
 const GraphQLWXueqiuLiveItem = new GraphQLObjectType({
   name: "XueqiuLiveItem",
@@ -14,7 +14,7 @@ const GraphQLWXueqiuLiveItem = new GraphQLObjectType({
   },
 })
 
-export default new Plugin({
+export default new Resolver({
   xueqiuLiveItems: {
     type: new GraphQLList(GraphQLWXueqiuLiveItem),
     resolve: async () => {
