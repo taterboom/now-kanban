@@ -3,7 +3,7 @@ export type PageProps = React.PropsWithChildren<{
 }>
 
 function Page(props: PageProps) {
-  return <>props.children</>
+  return <>{props.children}</>
 }
 
 export default Page

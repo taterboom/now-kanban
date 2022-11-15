@@ -16,8 +16,8 @@ function Module(props: ModuleProps) {
   return (
     <section className="flex flex-col">
       <h2 className="p-2 font-semibold text-lg">{props.title}</h2>
-      <div className="flex-1 flex flex-col p-2 border border-base-300/70 rounded-lg overflow-hidden backdrop-blur bg-base-200/30">
-        <div className="tabs px-2 py-1 border border-base-300 rounded bg-base-300/30">
+      <div className="flex-1 flex flex-col p-2 border border-base-300/60 rounded-lg overflow-hidden backdrop-blur bg-base-200/20">
+        <div className="tabs px-2 py-1 border border-base-300 rounded bg-base-300/20">
           {validChildren.map((child, index) => (
             <button
               key={child.props.title}
@@ -30,7 +30,7 @@ function Module(props: ModuleProps) {
             </button>
           ))}
         </div>
-        <div className="mt-2 px-2 py-1 border border-base-300 rounded bg-base-300/30 flex-1 overflow-y-auto">
+        <div className="mt-2 px-2 py-1 border border-base-300 rounded bg-base-300/20 flex-1 overflow-y-auto">
           {validChildren[currentIndex]}
         </div>
       </div>

@@ -22,8 +22,8 @@ const XueqiuLive: PluginComponent = () => {
         {data?.xueqiuLiveItems.map((item: any, index: number) => (
           <li key={index}>
             <a href={item.target} target="_blank" rel="noreferrer">
-              <p>{new Date(item.created_at).toLocaleTimeString()}</p>
-              <span>{item.text}</span>
+              <p className="font-semibold">{new Date(item.created_at).toLocaleTimeString()}</p>
+              <p>{item.text}</p>
             </a>
           </li>
         ))}

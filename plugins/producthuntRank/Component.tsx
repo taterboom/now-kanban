@@ -56,19 +56,19 @@ const ProducthuntRank: PluginComponent = () => {
       ) : !data ? (
         <GridItemLoading />
       ) : (
-        <ol className="mt-1 flex-1 overflow-y-auto">
+        <ol className="mt-1 flex-1 overflow-y-auto list-none">
           {data?.producthuntRankItems.map((item: any, index: number) => (
-            <li key={index}>
-              <div className="flex">
+            <li key={index} className="my-2">
+              <div className="flex gap-2">
                 <a href={item.link}>
-                  <img src={item.thumbnail} alt="" />
+                  <img width={24} src={item.thumbnail} alt="" />
                 </a>
                 <div>
-                  <p>
+                  <p className="font-semibold">
                     <a href={item.link}>{item.title}</a>
                   </p>
-                  <p>{item.desc}</p>
-                  <p>
+                  <p className="text-sm">{item.desc}</p>
+                  <p className="text-xs opacity-70">
                     <a href={item.categoryLink}>{item.category}</a> | <span>▲ {item.votes}</span>
                   </p>
                 </div>
