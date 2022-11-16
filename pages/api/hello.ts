@@ -1,5 +1,6 @@
+import { load } from "cheerio"
 import type { NextApiRequest, NextApiResponse } from "next"
-import { executeInPage } from "../../utils/headless"
+import { getProxyAgent } from "../../utils/proxy"
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse<any>) {
   console.log("?")
@@ -48,33 +49,60 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
   // }
   // console.log("!", $("item title").text())
 
-  const result = await executeInPage("https://www.indiehackers.com/explore", async (page) => {
-    await page.waitForSelector(".explore")
-    console.log("ok")
-    const data = await page.evaluate(() => {
-      const sections = document.querySelectorAll(".explore__category")
-      const sectionsData = []
-      for (const section of sections) {
-        const title = section.querySelector(".explore__category-title")?.textContent
-        const sectionData = {
-          title,
-          items: [] as any[],
-        }
-        sectionsData.push(sectionData)
-        const items = section.querySelectorAll(".explore__category-item")
-        for (const item of items) {
-          const itemTitle = item.querySelector(".category-item__title")?.textContent
-          const itemLink = item.getAttribute("href")
-          sectionData.items.push({
-            title: itemTitle,
-            link: itemLink,
-          })
-        }
-      }
-      return sectionsData
+  const result = await fetch("https://www.eastmoney.com/", {
+    agent: getProxyAgent(),
+  }).then((res) => res.text())
+  const $ = load(result)
+  const blocks = $(".hq-news .hq-news-con")
+  const data = blocks
+    .map(function () {
+      return $(this)
+        .find(".hq-news-con-b .hq-news-data")
+        .map(function () {
+          const values = $(this)
+            .children()
+            .map(function () {
+              return $(this).text()
+            })
+            .toArray()
+          const link = $(this).find(".nickname a").first().attr("href")
+          return {
+            link,
+            values: values.slice(0, 3),
+          }
+        })
+        .toArray()
     })
-    return data
-  })
+    .toArray()
+  console.log("!", data)
 
-  res.status(200).json({ data: result })
+  // const result = await executeInPage("https://www.eastmoney.com/", async (page) => {
+  //   await page.waitForSelector(".explore")
+  //   console.log("ok")
+  //   const data = await page.evaluate(() => {
+  //     const sections = document.querySelectorAll(".explore__category")
+  //     const sectionsData = []
+  //     for (const section of sections) {
+  //       const title = section.querySelector(".explore__category-title")?.textContent
+  //       const sectionData = {
+  //         title,
+  //         items: [] as any[],
+  //       }
+  //       sectionsData.push(sectionData)
+  //       const items = section.querySelectorAll(".explore__category-item")
+  //       for (const item of items) {
+  //         const itemTitle = item.querySelector(".category-item__title")?.textContent
+  //         const itemLink = item.getAttribute("href")
+  //         sectionData.items.push({
+  //           title: itemTitle,
+  //           link: itemLink,
+  //         })
+  //       }
+  //     }
+  //     return sectionsData
+  //   })
+  //   return data
+  // })
+
+  res.status(200).json({ data: data })
 }
