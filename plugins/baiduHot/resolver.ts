@@ -19,6 +19,7 @@ export default new Resolver({
           return { link, text }
         })
         .toArray()
+        .slice(1) // 第一条通常无意义
       return data
     },
   },
