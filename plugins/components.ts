@@ -1,3 +1,4 @@
+import baiduHotComponent from "./baiduHot/Component"
 import githubTrendingComponent from "./githubTrending/Component"
 import hacknewsComponent from "./hacknews/Component"
 import indiehackerExploreComponent from "./indiehackerExplore/Component"
@@ -18,6 +19,7 @@ const components = [
   xueqiuLiveComponent,
   producthuntRankComponent,
   indiehackerExploreComponent,
+  baiduHotComponent,
 ]
 
 export default components

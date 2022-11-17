@@ -11,6 +11,7 @@ const WeiboHot: PluginComponent = () => {
           desc
           pic
           desc_extr
+          scheme
         }
       }
     `
@@ -23,7 +24,9 @@ const WeiboHot: PluginComponent = () => {
           {data.weiboHotItems.map((item: any, index: number) => (
             <li key={index} className="flex gap-1 items-center">
               <img width={24} src={item.pic} alt="" />
-              <p>{item.desc}</p>
+              <a href={item.scheme} target="_blank" rel="noreferrer">
+                {item.desc}
+              </a>
               <span className="text-xs opacity-60">{item.desc_extr}</span>
             </li>
           ))}
@@ -35,5 +38,6 @@ const WeiboHot: PluginComponent = () => {
 
 WeiboHot.category = "综合新闻"
 WeiboHot.title = "Weibo热搜"
+WeiboHot.priority = 1
 
 export default WeiboHot

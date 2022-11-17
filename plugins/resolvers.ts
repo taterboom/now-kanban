@@ -1,3 +1,4 @@
+import baiduHotResolver from "./baiduHot/resolver"
 import githubTrendingResolver from "./githubTrending/resolver"
 import hacknewsResolver from "./hacknews/resolver"
 import indiehackerExploreResolver from "./indiehackerExplore/resolver"
@@ -18,6 +19,7 @@ const resolvers = [
   xueqiuLiveResolver,
   producthuntRankResolver,
   indiehackerExploreResolver,
+  baiduHotResolver,
 ]
 
 export default resolvers

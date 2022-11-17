@@ -6,7 +6,14 @@ import { PluginComponent } from "../plugins/PluginComponent"
 
 const modules = components.reduce<Record<string, PluginComponent[]>>((data, component) => {
   if (data[component.category]) {
-    data[component.category].push(component)
+    const insertIndex = data[component.category].findIndex(
+      (item) => (component.priority || 0) > (item.priority || 0)
+    )
+    if (insertIndex > -1) {
+      data[component.category].splice(insertIndex, 0, component)
+    } else {
+      data[component.category].push(component)
+    }
   } else {
     data[component.category] = [component]
   }

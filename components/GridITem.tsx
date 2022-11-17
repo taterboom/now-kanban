@@ -9,7 +9,7 @@ export function GridItemError() {
 }
 
 type GridItemProps = React.PropsWithChildren<{
-  title: string
+  title?: string
   error?: any
   loading?: boolean
   className?: string

@@ -3,11 +3,11 @@ import useSWR from "swr"
 import GridItem from "../../components/GridITem"
 import { PluginComponent } from "../PluginComponent"
 
-const V2exHot: PluginComponent = () => {
+const BaiduHot: PluginComponent = () => {
   const { data, error } = useSWR(
     gql`
       {
-        v2exHotItems {
+        baiduHotItems {
           link
           text
         }
@@ -16,12 +16,12 @@ const V2exHot: PluginComponent = () => {
   )
 
   return (
-    <GridItem title="V2EX热议" error={error} loading={!data}>
+    <GridItem error={error} loading={!data}>
       {!!data && (
         <ol>
-          {data.v2exHotItems.map((item: any, index: number) => (
+          {data.baiduHotItems.map((item: any, index: number) => (
             <li key={index}>
-              <a href={`https://v2ex.com${item.link}`} target="_blank" rel="noreferrer">
+              <a href={item.link} target="_blank" rel="noreferrer">
                 {item.text}
               </a>
             </li>
@@ -32,8 +32,8 @@ const V2exHot: PluginComponent = () => {
   )
 }
 
-V2exHot.category = "社区热议"
-V2exHot.title = "V2ex Hot"
-V2exHot.priority = 1
+BaiduHot.category = "综合新闻"
+BaiduHot.title = "百度热搜"
+BaiduHot.priority = 0.1
 
-export default V2exHot
+export default BaiduHot

@@ -11,17 +11,13 @@ const GithubTrendingItem = new GraphQLObjectType({
   fields: {
     title: { type: GraphQLString },
     link: { type: GraphQLString },
-    author: { type: GraphQLString },
-    img: { type: GraphQLString },
     desc: { type: GraphQLString },
     language: { type: GraphQLString },
     stars: { type: GraphQLInt },
-    forks: { type: GraphQLInt },
   },
 })
 
-const DATA_REGEXP =
-  /<img src="(.*)"\s.*<br>(.*)<br><br>Language:(.*)<br>Stars: (\d+)<br>Forks: (\d+)/
+const DATA_REGEXP = /<img src="(.*)"\s.*<br>(.*)<br><br>Language:(.*)<br>Stars:(.*)<br>Forks:(.*)/
 
 export default new Resolver({
   githubTrendingItems: {
@@ -47,7 +43,6 @@ export default new Resolver({
       const data = $("item").map(function () {
         const title: string = $(this).find("title").text()
         const link = $(this).find("link").text()
-        const author = $(this).find("author").text()
         let img = ""
         let desc = ""
         let language = ""
@@ -63,12 +58,9 @@ export default new Resolver({
         return {
           title: title.trim(),
           link: link.trim(),
-          author: author.trim(),
-          img: img.trim(),
           desc: desc.trim(),
           language: language.trim(),
-          stars: +stars,
-          forks: +forks,
+          stars: +stars.trim() || 0,
         }
       })
 

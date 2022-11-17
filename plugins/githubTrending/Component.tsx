@@ -18,12 +18,9 @@ const GithubTrending: PluginComponent = () => {
         githubTrendingItems(since: $since, language: $language, spoken_language: $spoken_language) {
           title
           link
-          author
-          img
           desc
           language
           stars
-          forks
         }
       }
     `,
@@ -87,11 +84,16 @@ const GithubTrending: PluginComponent = () => {
       ) : (
         <ol className="mt-1 flex-1 overflow-y-auto">
           {data?.githubTrendingItems.map((item: any, index: number) => (
-            <li key={index}>
-              {/* <a href={`https://v2ex.com${item.link}`} target="_blank" rel="noreferrer">
-            {item.text}
-          </a> */}
-              {item.title}
+            <li key={index} className="my-2">
+              <div className="inline-block align-top max-w-[calc(100%_-_2rem)]">
+                <p className="font-semibold">
+                  <a href={item.link}>{item.title}</a>
+                </p>
+                <p className="text-sm">{item.desc}</p>
+                <p className="text-xs opacity-70">
+                  <span>{item.language}</span> | <span>★ {item.stars}</span>
+                </p>
+              </div>
             </li>
           ))}
         </ol>
