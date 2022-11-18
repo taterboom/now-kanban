@@ -65,7 +65,7 @@ const ProducthuntRank: PluginComponent = () => {
                 </a>
                 <div>
                   <p className="font-semibold">
-                    <a href={item.link}>{item.title}</a>
+                    <a href={`https://www.producthunt.com${item.link}`}>{item.title}</a>
                   </p>
                   <p className="text-sm">{item.desc}</p>
                   <p className="text-xs opacity-70">
