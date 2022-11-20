@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+body {
+  font-family: "LXGW WenKai Lite", sans-serif;
+}
+
 * {
   box-sizing: border-box;
 }
