@@ -49,32 +49,32 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
   // }
   // console.log("!", $("item title").text())
 
-  const result = await fetch("https://www.eastmoney.com/", {
-    agent: getProxyAgent(),
-  }).then((res) => res.text())
-  const $ = load(result)
-  const blocks = $(".hq-news .hq-news-con")
-  const data = blocks
-    .map(function () {
-      return $(this)
-        .find(".hq-news-con-b .hq-news-data")
-        .map(function () {
-          const values = $(this)
-            .children()
-            .map(function () {
-              return $(this).text()
-            })
-            .toArray()
-          const link = $(this).find(".nickname a").first().attr("href")
-          return {
-            link,
-            values: values.slice(0, 3),
-          }
-        })
-        .toArray()
-    })
-    .toArray()
-  console.log("!", data)
+  // const result = await fetch("https://www.eastmoney.com/", {
+  //   agent: getProxyAgent(),
+  // }).then((res) => res.text())
+  // const $ = load(result)
+  // const blocks = $(".hq-news .hq-news-con")
+  // const data = blocks
+  //   .map(function () {
+  //     return $(this)
+  //       .find(".hq-news-con-b .hq-news-data")
+  //       .map(function () {
+  //         const values = $(this)
+  //           .children()
+  //           .map(function () {
+  //             return $(this).text()
+  //           })
+  //           .toArray()
+  //         const link = $(this).find(".nickname a").first().attr("href")
+  //         return {
+  //           link,
+  //           values: values.slice(0, 3),
+  //         }
+  //       })
+  //       .toArray()
+  //   })
+  //   .toArray()
+  // console.log("!", data)
 
   // const result = await executeInPage("https://www.eastmoney.com/", async (page) => {
   //   await page.waitForSelector(".explore")
@@ -103,6 +103,43 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
   //   })
   //   return data
   // })
+  const tab = "month"
+  const result = await fetch(`https://stackoverflow.com/?tab=${tab}`, {
+    agent: getProxyAgent(),
+  }).then((res) => res.text())
+  const $ = load(result)
+  const data = $("[id^=question-summary]")
+    .map(function () {
+      const [votes, answers, views] = $(this)
+        .find(
+          ".s-post-summary--stats .s-post-summary--stats-item .s-post-summary--stats-item-number"
+        )
+        .map(function () {
+          return +$(this).text() || 0
+        })
+        .toArray()
+
+      const titleEl = $(this).find(".s-post-summary--content-title a").first()
+      const title = titleEl.text()
+      const link = titleEl.attr("href") || ""
+
+      const tags = $(this)
+        .find(".js-post-tag-list-item")
+        .map(function () {
+          return $(this).text()
+        })
+        .toArray()
+
+      return {
+        title: title.trim(),
+        link: link.trim(),
+        views,
+        answers,
+        votes,
+        tags,
+      }
+    })
+    .toArray()
 
   res.status(200).json({ data: data })
 }

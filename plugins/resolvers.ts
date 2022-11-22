@@ -5,6 +5,7 @@ import indiehackerExploreResolver from "./indiehackerExplore/resolver"
 import jikeDailyResolver from "./jikeDaily/resolver"
 import oschinaHotResolver from "./oschinaHot/resolver"
 import producthuntRankResolver from "./producthuntRank/resolver"
+import stackoverflowHotResolver from "./stackoverflowHot/resolver"
 import stockResolver from "./stock/resolver"
 import v2exHotResolver from "./v2exHot/resolver"
 import weiboHotResolver from "./weiboHot/resolver"
@@ -22,6 +23,7 @@ const resolvers = [
   indiehackerExploreResolver,
   baiduHotResolver,
   xueqiuLiveResolver,
+  stackoverflowHotResolver,
 ]
 
 export default resolvers
