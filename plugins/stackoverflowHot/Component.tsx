@@ -54,7 +54,7 @@ const StackoverflowHot: PluginComponent = () => {
             <li key={index} className="my-2">
               <div className="inline-block align-top max-w-[calc(100%_-_2rem)]">
                 <p className="font-semibold leading-tight">
-                  <a href={item.link}>{item.title}</a>
+                  <a href={`https://stackoverflow.com${item.link}`}>{item.title}</a>
                 </p>
                 <p className="text-sm mt-0.5">{item.tags.map((tag: any) => `#${tag} `)}</p>
                 <p className="text-xs mt-0.5 opacity-70">
