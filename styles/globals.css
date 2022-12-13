@@ -25,3 +25,19 @@ ul {
 ol {
   @apply list-decimal list-inside
 }
+
+.common-wrapper {
+  @apply h-full flex flex-col
+}
+
+.common-header {
+  @apply flex gap-2
+}
+
+.common-body {
+  @apply mt-1 flex-1 overflow-y-auto
+}
+
+.common-select {
+  @apply select select-bordered select-xs
+}

@@ -1,5 +1,5 @@
 import { load } from "cheerio"
-import { GraphQLList } from "graphql"
+import { GraphQLList, GraphQLString } from "graphql"
 import { getProxyAgent } from "../../utils/proxy"
 import { GraphQLReadableLink } from "../CommonType"
 import { Resolver } from "../Resolver"
@@ -7,8 +7,11 @@ import { Resolver } from "../Resolver"
 export default new Resolver({
   hacknewsItems: {
     type: new GraphQLList(GraphQLReadableLink),
-    resolve: async () => {
-      const result = await fetch("https://news.ycombinator.com/", {
+    args: {
+      type: { type: GraphQLString }, // '' | 'ask' | 'show'
+    },
+    resolve: async (_, { type = "" }) => {
+      const result = await fetch(`https://news.ycombinator.com/${type}`, {
         agent: getProxyAgent(),
       }).then((res) => res.text())
       const $ = load(result)

@@ -30,13 +30,9 @@ const StackoverflowHot: PluginComponent = () => {
   if (!data) return <div>Loading...</div>
 
   return (
-    <GridItem className="h-full flex flex-col" error={error} loading={!data} ignoreDefaultRendering>
-      <div className="flex gap-2">
-        <select
-          className="select select-bordered select-xs"
-          value={tab}
-          onChange={(e) => setTab(e.target.value)}
-        >
+    <GridItem className="common-wrapper" error={error} loading={!data} ignoreDefaultRendering>
+      <div className="common-header">
+        <select className="common-select" value={tab} onChange={(e) => setTab(e.target.value)}>
           {TABS.map((item) => (
             <option key={item} value={item}>
               {item}
@@ -49,7 +45,7 @@ const StackoverflowHot: PluginComponent = () => {
       ) : !data ? (
         <GridItemLoading />
       ) : (
-        <ol className="mt-1 flex-1 overflow-y-auto">
+        <ol className="common-body">
           {data?.stackoverflowHotItems.map((item: any, index: number) => (
             <li key={index} className="my-2">
               <div className="inline-block align-top max-w-[calc(100%_-_2rem)]">

@@ -36,18 +36,14 @@ const GithubTrending: PluginComponent = () => {
 
   return (
     <GridItem
-      className="h-full flex flex-col"
+      className="common-wrapper"
       title="Github Trending"
       error={error}
       loading={!data}
       ignoreDefaultRendering
     >
-      <div className="flex gap-2">
-        <select
-          className="select select-bordered select-xs"
-          value={since}
-          onChange={(e) => setSince(e.target.value)}
-        >
+      <div className="commmon-header">
+        <select className="common-select" value={since} onChange={(e) => setSince(e.target.value)}>
           {SINCES.map((item) => (
             <option key={item} value={item}>
               {item}
@@ -55,7 +51,7 @@ const GithubTrending: PluginComponent = () => {
           ))}
         </select>
         <select
-          className="select select-bordered select-xs"
+          className="common-select"
           value={language}
           onChange={(e) => setLanguage(e.target.value)}
         >
@@ -66,7 +62,7 @@ const GithubTrending: PluginComponent = () => {
           ))}
         </select>
         <select
-          className="select select-bordered select-xs"
+          className="common-select"
           value={spokenLanguage}
           onChange={(e) => setSpokenLanguage(e.target.value)}
         >
@@ -82,7 +78,7 @@ const GithubTrending: PluginComponent = () => {
       ) : !data ? (
         <GridItemLoading />
       ) : (
-        <ol className="mt-1 flex-1 overflow-y-auto">
+        <ol className="common-body">
           {data?.githubTrendingItems.map((item: any, index: number) => (
             <li key={index} className="my-2">
               <div className="inline-block align-top max-w-[calc(100%_-_2rem)]">
