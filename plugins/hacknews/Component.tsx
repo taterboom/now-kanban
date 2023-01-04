@@ -10,6 +10,11 @@ const TYPES = [
   ["ask", "ask"],
 ]
 
+function formatLink(link: string) {
+  const isHNLink = link.startsWith("item?")
+  return isHNLink ? `https://news.ycombinator.com/${link}` : link
+}
+
 const Hacknews: PluginComponent = () => {
   const [type, setType] = useState(TYPES[0][1])
   const { data, error } = useSWR([
@@ -41,7 +46,7 @@ const Hacknews: PluginComponent = () => {
         <ol className="common-body">
           {data.hacknewsItems.map((item: any, index: number) => (
             <li key={index}>
-              <a href={item.link} target="_blank" rel="noreferrer">
+              <a href={formatLink(item.link)} target="_blank" rel="noreferrer">
                 {item.text}
               </a>
             </li>
