@@ -25,19 +25,27 @@ export default new Resolver({
           withStartIndices: true,
         },
       })
-      const title = $("item title").first().text()
-      const htmlStr = $("item description").first().text()
-      let items
-      if (htmlStr) {
-        const $ = load(htmlStr)
-        items = $("a")
-          .map(function () {
-            const link: any = $(this).attr("href")
-            const text = $(this).text()
-            return { link, text }
-          })
-          .toArray()
-      }
+      const items = $("item").map(function () {
+        const text: string = $(this).find("title").text()
+        const link = $(this).find("link").text()
+        return {
+          link: link.trim(),
+          text: text.trim().replace("一觉醒来世界发生了什么 ", ""),
+        }
+      })
+      const title = $("lastBuildDate").first().text()
+      // const htmlStr = $("item description").first().text()
+      // let items
+      // if (htmlStr) {
+      //   const $ = load(htmlStr)
+      //   items = $("a")
+      //     .map(function () {
+      //       const link: any = $(this).attr("href")
+      //       const text = $(this).text()
+      //       return { link, text }
+      //     })
+      //     .toArray()
+      // }
       const data = {
         title,
         items,
