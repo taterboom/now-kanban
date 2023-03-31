@@ -10,7 +10,7 @@ WORKDIR /app
 # ENV PLAYWRIGHT_BROWSERS_PATH=0
 # Install dependencies based on the preferred package manager
 COPY package.json yarn.lock* package-lock.json* pnpm-lock.yaml* ./
-RUN npm install pnpm -g && pnpm i --frozen-lockfile;
+RUN npm install pnpm@^7 -g && pnpm i --frozen-lockfile;
 
 # Rebuild the source code only when needed
 FROM node:16-alpine AS builder
