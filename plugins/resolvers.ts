@@ -7,6 +7,7 @@ import oschinaHotResolver from "./oschinaHot/resolver"
 import producthuntRankResolver from "./producthuntRank/resolver"
 import stackoverflowHotResolver from "./stackoverflowHot/resolver"
 import stockResolver from "./stock/resolver"
+import stockPriceResolver from "./stockPrice/resolver"
 import v2exHotResolver from "./v2exHot/resolver"
 import weiboHotResolver from "./weiboHot/resolver"
 import xueqiuLiveResolver from "./xueqiuLive/resolver"
@@ -24,6 +25,7 @@ const resolvers = [
   baiduHotResolver,
   xueqiuLiveResolver,
   stackoverflowHotResolver,
+  stockPriceResolver,
 ]
 
 export default resolvers

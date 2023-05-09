@@ -16,6 +16,7 @@ specifiers:
   graphql-scalars: ^1.20.0
   graphql-yoga: 3.0.0-next.9
   https-proxy-agent: ^5.0.1
+  iconv-lite: ^0.6.3
   lodash: ^4.17.21
   next: 13.0.1
   playwright-chromium: ^1.27.1
@@ -41,6 +42,7 @@ dependencies:
   graphql-scalars: 1.20.0_graphql@16.6.0
   graphql-yoga: 3.0.0-next.9_xfoe4adolgvm4tvnio5xigcr6e
   https-proxy-agent: 5.0.1
+  iconv-lite: 0.6.3
   lodash: 4.17.21
   next: 13.0.1_biqbaboplfbrettd7655fr4n2y
   playwright-chromium: 1.27.1
@@ -2184,6 +2186,13 @@ packages:
 
   /iconv-lite/0.4.24:
     resolution: {integrity: sha512-v3MXnZAcvnywkTUEZomIActle7RXXeedOR31wwl7VlyoXO4Qi9arvSenNQWne1TcRwhCL1HwLI21bEqdpj8/rA==}
+    engines: {node: '>=0.10.0'}
+    dependencies:
+      safer-buffer: 2.1.2
+    dev: false
+
+  /iconv-lite/0.6.3:
+    resolution: {integrity: sha512-4fCk79wshMdzMp2rH06qWrJE4iolqLhCUH+OiuIgU++RB0+94NlDL81atO7GX55uUKueo0txHNtvEyI6D7WdMw==}
     engines: {node: '>=0.10.0'}
     dependencies:
       safer-buffer: 2.1.2

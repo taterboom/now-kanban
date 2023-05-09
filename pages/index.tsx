@@ -5,6 +5,7 @@ import components from "../plugins/components"
 import { PluginComponent } from "../plugins/PluginComponent"
 
 const modules = components.reduce<Record<string, PluginComponent[]>>((data, component) => {
+  if (!component.category) throw new Error(`PluginComponent ${component.title} must have category`)
   if (data[component.category]) {
     const insertIndex = data[component.category].findIndex(
       (item) => (component.priority || 0) > (item.priority || 0)
@@ -26,7 +27,7 @@ export default function Index() {
       {Object.entries(modules).map(([moduleTitle, pages]) => (
         <Module key={moduleTitle} title={moduleTitle}>
           {pages.map((PageItem) => (
-            <Page key={PageItem.title} title={PageItem.title}>
+            <Page key={PageItem.title} title={PageItem.title!}>
               <PageItem />
             </Page>
           ))}
