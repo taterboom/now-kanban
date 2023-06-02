@@ -1,8 +1,10 @@
 import baiduHotComponent from "./baiduHot/Component"
+import chromeReleasesComponent from "./chromeReleases/Component"
 import githubTrendingComponent from "./githubTrending/Component"
 import hacknewsComponent from "./hacknews/Component"
 import indiehackerExploreComponent from "./indiehackerExplore/Component"
 import jikeDailyComponent from "./jikeDaily/Component"
+import notionReleasesComponent from "./notionReleases/Component"
 import oschinaHotComponent from "./oschinaHot/Component"
 import policyDatabaseComponent from "./policyDatabase/Component"
 import producthuntRankComponent from "./producthuntRank/Component"
@@ -28,6 +30,8 @@ const components = [
   stackoverflowHotComponent,
   stockPriceComponent,
   policyDatabaseComponent,
+  chromeReleasesComponent,
+  notionReleasesComponent,
 ]
 
 export default components
