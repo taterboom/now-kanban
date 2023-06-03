@@ -1,10 +1,9 @@
+import releasesResolver from "./Releases/resolver"
 import baiduHotResolver from "./baiduHot/resolver"
-import chromeReleasesResolver from "./chromeReleases/resolver"
 import githubTrendingResolver from "./githubTrending/resolver"
 import hacknewsResolver from "./hacknews/resolver"
 import indiehackerExploreResolver from "./indiehackerExplore/resolver"
 import jikeDailyResolver from "./jikeDaily/resolver"
-import notionReleasesResolver from "./notionReleases/resolver"
 import oschinaHotResolver from "./oschinaHot/resolver"
 import producthuntRankResolver from "./producthuntRank/resolver"
 import stackoverflowHotResolver from "./stackoverflowHot/resolver"
@@ -28,8 +27,7 @@ const resolvers = [
   xueqiuLiveResolver,
   stackoverflowHotResolver,
   stockPriceResolver,
-  chromeReleasesResolver,
-  notionReleasesResolver,
+  releasesResolver,
 ]
 
 export default resolvers

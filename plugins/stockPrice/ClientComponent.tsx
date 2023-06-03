@@ -40,29 +40,27 @@ const StockPrice = () => {
       </Settings>
       {!!data && (
         <table className="table table-compact">
+          <thead>
+            <tr>
+              <th>code</th>
+              <th>name</th>
+              <th>price</th>
+              <th>open</th>
+              <th>high</th>
+              <th>low</th>
+            </tr>
+          </thead>
           <tbody>
-            <thead>
-              <tr>
-                <th>code</th>
-                <th>name</th>
-                <th>price</th>
-                <th>open</th>
-                <th>high</th>
-                <th>low</th>
+            {data.stockPrice.map((item: any, index: number) => (
+              <tr key={index}>
+                <td>{item.code}</td>
+                <td>{item.name}</td>
+                <td>{item.price}</td>
+                <td>{item.open}</td>
+                <td>{item.high}</td>
+                <td>{item.low}</td>
               </tr>
-            </thead>
-            <tbody>
-              {data.stockPrice.map((item: any, index: number) => (
-                <tr key={index}>
-                  <td>{item.code}</td>
-                  <td>{item.name}</td>
-                  <td>{item.price}</td>
-                  <td>{item.open}</td>
-                  <td>{item.high}</td>
-                  <td>{item.low}</td>
-                </tr>
-              ))}
-            </tbody>
+            ))}
           </tbody>
         </table>
       )}
