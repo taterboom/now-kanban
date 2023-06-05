@@ -11,7 +11,7 @@ body {
 }
 
 .tabs {
-  @apply gap-4
+  @apply gap-x-4 gap-y-1
 }
 
 .tab {
