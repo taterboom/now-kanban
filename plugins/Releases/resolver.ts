@@ -62,6 +62,25 @@ async function chromeArticle() {
   }
 }
 
+async function chromeExtension() {
+  const index = `https://developer.chrome.com/docs/extensions/whatsnew/`
+  const result = await fetch(index, {
+    agent: getProxyAgent(),
+  }).then((res) => res.text())
+  const dom = new JSDOM(result, { url: index })
+  const contentBody = dom.window.document.querySelector(".center-images")!
+  const title = contentBody.querySelector("h3") as HTMLElement
+  const link = contentBody.querySelector("h3 a") as HTMLAnchorElement
+  const time = contentBody.querySelector("h3 + p > time") as HTMLTimeElement
+  return {
+    project: "ChromeExtension",
+    index,
+    title: title?.textContent?.slice(2),
+    link: link?.href,
+    updated: time?.textContent,
+  }
+}
+
 async function notionRelease() {
   const result = await fetch("https://www.notion.so/releases", {
     agent: getProxyAgent(),
@@ -115,6 +134,7 @@ export default new Resolver({
       return Promise.all([
         chromeBlog(),
         chromeArticle(),
+        chromeExtension(),
         notionRelease(),
         notionDeveloper(),
         vercel(),
