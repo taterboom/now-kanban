@@ -28,7 +28,11 @@ const IndiehackerExplore: PluginComponent = () => {
               <ol>
                 {section.items.map((item: any, index: number) => (
                   <li key={index}>
-                    <a href={item.link} target="_blank" rel="noreferrer">
+                    <a
+                      href={`https://www.indiehackers.com${item.link}`}
+                      target="_blank"
+                      rel="noreferrer"
+                    >
                       {item.text}
                     </a>
                   </li>
