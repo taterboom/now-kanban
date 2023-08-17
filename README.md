@@ -1,6 +1,6 @@
 # Now Kanban
 
-> personal dailay kanban
+> personal daily kanban
 
 ## Add
 
